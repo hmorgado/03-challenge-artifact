@@ -1,0 +1,26 @@
+name: challenge-artifacts
+
+# job 1 actions/checkout
+# job 2 actions/upload-artifact
+
+on: push
+env:
+  FILE_NAME: heitors-file
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: check out code
+        uses: actions/checkout@v1
+
+      - name: create ${{ env.FILE_NAME }} file
+        run: echo "you're great, be happy" > ${{ env.FILE_NAME }}
+
+      - name: upload file ${{ env.FILE_NAME }}
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: linux
+          path: ./${{ env.FILE_NAME }}
